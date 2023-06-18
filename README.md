@@ -1,47 +1,56 @@
-## ![Dive logo](https://user-images.githubusercontent.com/424487/219708981-f0416526-ba48-4b01-b5b3-c0eb73362718.png) Dive 
-<!-- ![Company Logo](https://example.org) -->
+# Keep burning it
 
-| Octernship info  | Timelines and Stipend |
-| ------------- | ------------- |
-| Assignment Deadline  | 19th June 2023  |
-| Octernship Duration  | 3rd July 2023 - 3rd October 2023 |
-| Monthly Stipend  | $500 USD  |
+This documentation provides an overview of the project, including instructions for setting it up locally. It also outlines the project workflow, scenario, and assumptions made during development. For a more detailed understanding, refer to the API documentation and review the project's code and database models.
 
-## Assignment
+## Documentation
+To access the API documentation, please click [here](https://documenter.getpostman.com/view/22678038/2s93sf1W9p).
+
+## Getting Started
+
+Follow the steps below to set up the project on your local machine:
+
+1. Clone the project repository by running the following command:
+``` https://github.com/Gibril1/BurnItOn.git ```
+
+2. Create a  virutal environment
+``` python -m venv .venv ``` 
+* On Windows: Activate by:  ```.venv/scripts/activate```
+* On MacOS and Linux: Activate by:  ```source .venv/bin/activate```
+
+3. Install dependencies
+```pip install -r requirements.txt```
+
+4. Run ``` python manage.py runserver ``` to server on port ```8000``` on local machine
+
+## Running test suites
+
+There are three apps in this project. They are **users**, **calories** and **calory_limit**
+
+* For testing urls:
+``` python manage.py test <app_name>.tests.test_urls ```
+* For testing models:
+``` python manage.py test <app_name>.tests.test_models ```
+* For testing views:
+``` python manage.py test <app_name>.tests.test_views ```
 
 
-# Write a REST API for the input of calories in Python
+## Project Workflow
+### Scenario
+An arbitrary user wants to track the amount of calories he takes in daily. As a backend developer, write an API in python to enable the user achieve the task
 
-### Task Instructions
-- API Users must be able to create an account and log in.
-- All API calls must be authenticated.
-- Implement at least three roles with different permission levels: a regular user would only be able to CRUD on their owned records, a user manager would be able to CRUD only users, and an admin would be able to CRUD all records and users.
-- Each entry has a date, time, text, and number of calories.
-- If the number of calories is not provided, the API should connect to a Calories API provider (for example, https://www.nutritionix.com) and try to get the number of calories for the entered meal.
-- User setting – Expected number of calories per day.
-- Each entry should have an extra boolean field set to true if the total for that day is less than the expected number of calories per day, otherwise should be false.
-- The API must be able to return data in the JSON format.
-- The API should provide filter capabilities for all endpoints that return a list of elements, as well should be able to support pagination.
-- Write unit and e2e tests.
-- Use any *Python* web framework
-- Use *SQLite* as the database
+### Assumptions
+I assumed that since the user wants to keep track of his daily calory intake, the user would have to set daily limts.
+First of all, in a single day, the user cannot set more than one limits. 
 
-### Task Expectations
-- API Design Best Practices
-- Documentation of any assumptions or choices made and why
-- Links as citation to any article / code referred to or used
-- Unit tests covering the core calories logic
-- Appropriate exception handling and error messages
-- Code Quality - remove any unnecessary code, avoid large functions
-- Good commit history - we won’t accept a repo with a single giant commit 🙅‍♀️
+There are three database models I used.
 
-### Task submission
-Using the [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow#following-github-flow) for assignment submission
-1. Creating a new branch 
-2. Raising a Pull Request for submission
-3. Using GitHub Discussions to ask any relevant questions regarding the project
-4. Final submission Checklist:
-- [ ] SUBMISSION.md in the repository / PR, with:
-  - [ ] commands to set up the repo (dependencies etc.)
-  - [ ] commands to run the test suite
-  - [ ] commands to run the API server
+1. **User**: This table stores the details of the user and its role whether a Manager or Regular User
+2. **Category Limit**: This table stores the daily calory limits of the user
+3. **Calories**: This table stores the amount of calories and food taken. 
+
+**The tables have a one-to-many-relationship between them**
+
+
+### Logic
+Therefore on the CategoryLimit model, there is a field called present_calory_amount that keeps track of the number of calories the user takes in. When this value exceeds the set calory_limit, another field called exceeded_maximum which is a Boolean Field is set to True
+
