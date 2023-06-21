@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
+
 
 const styles = StyleSheet.create({
     buttonContainer: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
         flexDirection: 'row',
-      backgroundColor: '#8d9a9a'
+      backgroundColor: 'hsla(153, 25%, 84%, 1)'
     },
     buttonIcon: {
       paddingRight: 8,
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     buttonLabel: {
       color: '#333',
       fontSize: 16,
-    },
+  }
   });
 
   
