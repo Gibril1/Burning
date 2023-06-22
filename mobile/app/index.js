@@ -1,8 +1,8 @@
-import { View, SafeAreaView, StyleSheet, ScrollView } from "react-native";
+import { View, SafeAreaView, ScrollView } from "react-native";
 import { Stack } from 'expo-router'
 
 import Welcome from "../components/welcome/Welcome.jsx";
-import Login from "./login/Login.jsx";
+
 
 
 export default function Index() {
@@ -17,7 +17,7 @@ export default function Index() {
       
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
-          <Login/>
+          <Welcome/>
         </View>
       </ScrollView>
     </SafeAreaView>

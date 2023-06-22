@@ -10,9 +10,7 @@ import Food from '../../assets/BGFood.jpg'
 const Welcome = () => {
   const router = useRouter()
 
-  const handlePress = () => {
-    router.push('./login/Login.jsx')
-  }
+  
   
   return (
     <View style={styles.container}>
@@ -21,8 +19,8 @@ const Welcome = () => {
             {/* <Text style={styles.heroText}>Do you want to burn it</Text> */}
         </View>
         <View style={styles.buttonSection}>
-          <Button name = 'Register' />
-          <Button name = 'Login' onPress= {handlePress} />
+          <Button name = 'Register' handleClick={() => {router.push('/registration/Registration')}} />
+          <Button name = 'Login' handleClick={() => {router.push('/login/Login')}} />
         </View>
       </ImageBackground>
     </View>
