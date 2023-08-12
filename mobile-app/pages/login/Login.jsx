@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { View, TextInput, Text, TouchableOpacity } from "react-native"
-import ToastManager, { Toast } from 'toastify-react-native'
+// import ToastManager, { Toast } from 'toastify-react-native'
 import { useDispatch } from 'react-redux'
 import { login, reset } from '../../features/auth/AuthSlice'
 
@@ -26,7 +26,8 @@ const Login = () => {
 
     const handleLogin = () => {
         if (!username || !password) {
-            Toast.success('Please enter all details')
+            // Toast.success('Please enter all details')
+            console.log('there are no details')
             return
         }
 
@@ -34,13 +35,13 @@ const Login = () => {
             username,
             password
         }
-
+        console.log(userData)
         dispatch(login(userData))
         dispatch(reset())
     }
     return (
         <View style={styles.container}>
-            <ToastManager/>
+            {/* <ToastManager/> */}
             <View style={styles.heroTextView}>
                 <Text style={styles.heroText}>Welcome! Get Started</Text>
             </View>
